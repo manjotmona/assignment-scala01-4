@@ -28,4 +28,6 @@ object Application extends App {
   log.info(obj.findSum("cube"))
   log.info("\n")
   log.info(obj.findSum("int"))
+  log.info("\n")
+  obj.printingPascal()
 }

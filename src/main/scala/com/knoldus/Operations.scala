@@ -1,5 +1,7 @@
 package com.knoldus
 
+import org.apache.log4j.Logger
+
 /**
  * Created by manjot on 11/1/18.
  */
@@ -30,7 +32,7 @@ class Operations {
       }
     }
 
-    operation match {
+    operation.toLowerCase match {
       case "sum" => recursiveCall(list, (num1, num2) => num1 + num2, zero)
       case "product" => recursiveCall(list, (num1, num2) => num1 * num2, one)
       case "maximum" => recursiveCall(list, (num1, num2) => if (num1 > num2) {
@@ -41,6 +43,27 @@ class Operations {
     }
   }
 
+  val log = Logger.getLogger(this.getClass)
+  def generatingPascalNumber(column: Int, row: Int): Int = {
+    if (column == 0 || column == row) {
+      1
+    } else {
+      generatingPascalNumber(column - 1, row - 1) + generatingPascalNumber(column, row - 1)
+    }
+  }
+
+  def printingPascal() {
+    log.info("Pascal's Triangle\n")
+    for (row <- 0 to 4) {
+      for (space <- 1 to 4 - row) {
+        log.info(" ")
+      }
+      for (column <- 0 to row) {
+        log.info(generatingPascalNumber(column, row) + " ")
+      }
+      log.info("\n")
+    }
+  }
 
 }
 
