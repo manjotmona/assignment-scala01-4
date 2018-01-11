@@ -16,27 +16,27 @@ class Operations {
 
   def findSum(str: String): Int = {
     str.toLowerCase match {
-      case "square" => sum((a, b) => (a * a) + (b * b), four, six)
-      case "cube" => sum((a, b) => (a * a * a) + (b * b * b), four, six)
-      case "int" => sum((a, b) => a + b, four, six)
+      case "square" => sum((num1, num2) => (num1 * num1) + (num2 * num2), four, six)
+      case "cube" => sum((num1, num2) => (num1 * num1 * num1) + (num2 * num2 * num2), four, six)
+      case "int" => sum((num1, num2) => num1 + num2, four, six)
     }
   }
 
   def operatingList(list: List[Int], operation: String): Int = {
-    def recCall(list: List[Int], f: (Int, Int) => Int, result: Int): Int = {
+    def recursiveCall(list: List[Int], f: (Int, Int) => Int, result: Int): Int = {
       list match {
         case Nil => result
-        case head :: tail => recCall(tail, f: (Int, Int) => Int, f(head, result))
+        case head :: tail => recursiveCall(tail, f: (Int, Int) => Int, f(head, result))
       }
     }
 
     operation match {
-      case "sum" => recCall(list, (a, b) => a + b, zero)
-      case "product" => recCall(list, (a, b) => a * b, one)
-      case "maximum" => recCall(list, (a, b) => if (a > b) {
-        a
+      case "sum" => recursiveCall(list, (num1, num2) => num1 + num2, zero)
+      case "product" => recursiveCall(list, (num1, num2) => num1 * num2, one)
+      case "maximum" => recursiveCall(list, (num1, num2) => if (num1 > num2) {
+        num1
       } else {
-        b
+        num2
       }, zero)
     }
   }
